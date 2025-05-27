@@ -122,6 +122,12 @@ dns:
       - https://dns.google/dns-query
 proxies: ~
 proxy-groups:
+  - name: ⚡ URL-TEST
+    type: url-test
+    proxies:
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    lazy: false
   - type: select
     name: 🚀 节点选择
     proxies:
