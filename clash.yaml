@@ -1,0 +1,235 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+geodata-mode: true
+geo-auto-update: true
+geodata-loader: standard
+geo-update-interval: 24
+geox-url:
+  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: >-
+    https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: >-
+    https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  asn: >-
+    https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
+rule-providers:
+  geolocation-cn:
+    type: http
+    format: mrs
+    behavior: domain
+    url: >-
+      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs
+    path: ./ruleset/geolocation-cn.mrs
+    interval: 86400
+  geolocation-!cn:
+    type: http
+    format: mrs
+    behavior: domain
+    url: >-
+      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs
+    path: ./ruleset/geolocation-!cn.mrs
+    interval: 86400
+  private:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    url: >-
+      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs
+    path: ./ruleset/private.mrs
+    interval: 86400
+  cn:
+    type: http
+    format: mrs
+    behavior: ipcidr
+    url: >-
+      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs
+    path: ./ruleset/cn.mrs
+  📵Advertising:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/📵Advertising.ymal
+  🌏Global:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🌏Global.ymal
+  🌏GlobalMedia:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🌏GlobalMedia.ymal
+  🇨🇳Mainland:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🇨🇳Mainland.ymal
+  🇨🇳MainlandMedia:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🇨🇳MainlandMedia.ymal
+  📺Media:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/📺Media.ymal
+  🎮Game:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🎮Game.ymal
+  🍎Apple:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🍎Apple.ymal
+  🗄️Microsoft:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🗄️Microsoft.ymal
+  📟Google:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/📟Google.ymal
+  🚫Reject:
+        behavior: classical
+        interval: 86400
+        type: http
+        url: https://raw.githubusercontent.com/yuanwenbin5521/clash-config/refs/heads/main/🚫Reject.ymal
+dns:
+  enable: true
+  ipv6: true
+  respect-rules: true
+  enhanced-mode: fake-ip
+  nameserver:
+    - https://120.53.53.53/dns-query
+    - https://223.5.5.5/dns-query
+  proxy-server-nameserver:
+    - https://120.53.53.53/dns-query
+    - https://223.5.5.5/dns-query
+  nameserver-policy:
+    geosite:cn,private:
+      - https://120.53.53.53/dns-query
+      - https://223.5.5.5/dns-query
+    geosite:geolocation-!cn:
+      - https://dns.cloudflare.com/dns-query
+      - https://dns.google/dns-query
+proxies: ~
+proxy-groups:
+  - type: select
+    name: 🚀 节点选择
+    proxies:
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🏠 私有网络
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - REJECT
+  - type: select
+    name: 🔒 国内服务
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - REJECT
+  - type: select
+    name: 🌐 非中国
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🐟 漏网之鱼
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - REJECT
+  - type: select
+    name: 📵Advertising
+    proxies:
+      - REJECT
+      - DIRECT
+  - type: select
+    name: 🌏Global
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🌏GlobalMedia
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🇨🇳Mainland
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🇨🇳MainlandMedia
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 📺Media
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🎮Game
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🍎Apple
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🗄️Microsoft
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 📟Google
+    proxies:
+      - 🚀 节点选择
+      - DIRECT
+      - REJECT
+  - type: select
+    name: 🚫Reject
+    proxies:
+      - REJECT
+      - DIRECT
+
+rules:
+  - RULE-SET,private,🏠 私有网络,no-resolve
+  - RULE-SET,📵Advertising,📵Advertising
+  - RULE-SET,🚫Reject,🚫Reject
+  - RULE-SET,🇨🇳Mainland,🇨🇳Mainland
+  - RULE-SET,🇨🇳MainlandMedia,🇨🇳MainlandMedia
+  - RULE-SET,📺Media,📺Media
+  - RULE-SET,🎮Game,🎮Game
+  - RULE-SET,🍎Apple,🍎Apple
+  - RULE-SET,🗄️Microsoft,🗄️Microsoft
+  - RULE-SET,📟Google,📟Google
+  - RULE-SET,🌏Global,🌏Global
+  - RULE-SET,🌏GlobalMedia,🌏GlobalMedia
+  - RULE-SET,geolocation-cn,🔒 国内服务
+  - RULE-SET,cn,🔒 国内服务,no-resolve
+  - RULE-SET,geolocation-!cn,🌐 非中国
+  - MATCH,🐟 漏网之鱼
