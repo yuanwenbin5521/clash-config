@@ -21,7 +21,7 @@ rule-providers:
     format: mrs
     behavior: domain
     url: >-
-      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs
+      https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-cn.mrs
     path: ./ruleset/geolocation-cn.mrs
     interval: 86400
   geolocation-!cn:
@@ -29,7 +29,7 @@ rule-providers:
     format: mrs
     behavior: domain
     url: >-
-      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs
+      https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/geolocation-!cn.mrs
     path: ./ruleset/geolocation-!cn.mrs
     interval: 86400
   private:
@@ -37,7 +37,7 @@ rule-providers:
     format: mrs
     behavior: ipcidr
     url: >-
-      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs
+      https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/private.mrs
     path: ./ruleset/private.mrs
     interval: 86400
   cn:
@@ -45,7 +45,7 @@ rule-providers:
     format: mrs
     behavior: ipcidr
     url: >-
-      https://gh.sageer.me/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs
+      https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs
     path: ./ruleset/cn.mrs
   📵Advertising:
         behavior: classical
